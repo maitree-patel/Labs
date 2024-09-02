@@ -22,7 +22,7 @@ public class DNAGenerator
 			for (int x=0; x<1000; x++)
 			{
 				String codon = "";
-				for (int y=0; y<3; y++) {
+				while (codon.length() < 3) {
 					int nucleotide = random.nextInt(4);
 					if (nucleotide == 0 && a_total < 360) {
 						seq = seq + "A";
@@ -44,10 +44,11 @@ public class DNAGenerator
 						codon = codon + "T";
 						t_total = t_total + 1;
 					}
-					if (codon.equals("AAA")) {
-						aaa_counter += 1;
-					}
 				}
+				if (codon.equals("AAA")) {
+					aaa_counter += 1;
+				}
+				System.out.println(codon);
 			}
 			System.out.println(seq);
 			System.out.println(a_total);
@@ -72,5 +73,4 @@ public class DNAGenerator
  * Which is closer to the expected frequency than the symmetric distribution of A,C,G,T.
  */
 
-//Hi!
 
