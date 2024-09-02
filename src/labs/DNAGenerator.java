@@ -68,6 +68,7 @@ public class DNAGenerator
  */
 
 /* Question 3
- * Changing the expected frequencies produces a observed frequency of AAA between 0.1
+ * Changing the expected frequencies produces a observed frequency of AAA between 0.16 to 0.36
+ * Which is closer to the expected frequency than the symmetric distribution of A,C,G,T.
  */
 
