@@ -12,7 +12,6 @@ public class DNAGenerator_TestAICode {
 	
 	// Function to generate a nucleotide based on given probabilities
     public static char generateNucleotide(Random rand) {
-    	String sequence = "";
         double randomValue = rand.nextDouble();
         if (randomValue < 0.12) {
             return 'A';
@@ -36,9 +35,21 @@ public class DNAGenerator_TestAICode {
 
     public static void main(String[] args) {
         Random rand = new Random();
+        String sequence = "";
         for (int i = 0; i < 1000; i++) {
-            System.out.println(generate3Mer(rand));
+        	/*editing code to assign generate3Mer(rand) to a variable
+        	 * And add it to a main sequence to test conditions
+        	 */
+            String codon = generate3Mer(rand);
+            sequence = sequence + codon;
+            System.out.println(codon);
         }
+        System.out.println(sequence);
+        System.out.println(sequence.chars().filter(ch -> ch == 'A').count());
+        System.out.println(sequence.chars().filter(ch -> ch == 'C').count());
+        System.out.println(sequence.chars().filter(ch -> ch == 'G').count());
+        System.out.println(sequence.chars().filter(ch -> ch == 'C').count());
+        System.out.println(sequence.length());
     }
 }
 
