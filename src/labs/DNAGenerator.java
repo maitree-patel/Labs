@@ -17,7 +17,7 @@ public class DNAGenerator
 		
 		float aaa_counter = 0;
 		
-		while (a_total+c_total+g_total+t_total<3000) 
+		while (seq.length()<3000) 
 		{	
 			for (int x=0; x<1000; x++)
 			{
