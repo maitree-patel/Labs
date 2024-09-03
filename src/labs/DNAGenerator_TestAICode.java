@@ -49,10 +49,11 @@ public class DNAGenerator_TestAICode {
         }
         
         /*
-         * Testing condition:
+         * Testing conditions simply by printing out the following:
          * Calculating the total length of sequence the codons would form and 
          * the number of times a nucleotide occurs
          */
+        
         double a_observed = sequence.chars().filter(ch -> ch == 'A').count();
         double c_observed = sequence.chars().filter(ch -> ch == 'C').count();
         double g_observed = sequence.chars().filter(ch -> ch == 'G').count();
@@ -91,6 +92,9 @@ public class DNAGenerator_TestAICode {
         } else {
         	System.out.println("Accept Ho, distribution is same as that described by Ho");
         }
+        /*
+         * The distribution of nucleotide does not align with the expected from the code produced by ChatGPT
+         */
     }
 }
 
