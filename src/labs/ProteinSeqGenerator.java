@@ -122,5 +122,9 @@ public class ProteinSeqGenerator {
 		}
 	}
 
-//If it was AI code, I would use the chi-square test to verify that the protein sequence is of the expected background level
+/*
+ * If it was AI code, I would use the chi-square test to verify that the protein sequence is of the expected background level
+ * Or check the percentage of each amino acid by printed in out 
+ */
+
 
