@@ -1,4 +1,4 @@
-package labs;
+package lab01;
 
 import java.util.Random;
 
