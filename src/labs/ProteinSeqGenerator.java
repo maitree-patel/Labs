@@ -1,7 +1,7 @@
 /*
  * Modifying the DNASequnece generator for protein sequence, I got the following code
  * This is not ideal or efficient since we have a really large if-else-block of code
- * The ProteinSeqGenerator_TestAICode.java contains an optimized version of this code along with testing it
+ * The ProSeqGenerator_TestAICode.java contains an optimized version of this code along with testing it
  */
 
 package labs;
