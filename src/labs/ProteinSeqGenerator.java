@@ -1,3 +1,9 @@
+/*
+ * Modifying the DNASequnece generator for protein sequence, I got the following code
+ * This is not ideal or efficient since we have a really large if-else-block of code
+ * The ProteinSeqGenerator_TestAICode.java contains an optimized version of this code along with testing it
+ */
+
 package labs;
 
 import java.util.Random;
@@ -121,10 +127,5 @@ public class ProteinSeqGenerator {
 			System.out.println(pro_seq.length());
 		}
 	}
-
-/*
- * If it was AI code, I would use the chi-square test to verify that the protein sequence is of the expected background level
- * Or check the percentage of each amino acid by printed in out 
- */
 
 
