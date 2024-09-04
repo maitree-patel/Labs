@@ -31,6 +31,7 @@ public class ProteinSeqGenerator {
 		
 		String pro_seq = "";
 		
+		//Since 3000 nucleotide DNA sequence would make a 1000 amino acid sequence, creating a sequence of 1000 amino acids
 		while (pro_seq.length()<1000) 
 		{	
 			int nucleotide = random.nextInt(20);
@@ -120,3 +121,6 @@ public class ProteinSeqGenerator {
 			System.out.println(pro_seq.length());
 		}
 	}
+
+//If it was AI code, I would use the chi-square test to verify that the protein sequence is of the expected background level
+
