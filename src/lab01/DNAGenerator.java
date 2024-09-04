@@ -8,7 +8,7 @@ public class DNAGenerator
 	{
 		Random random = new Random();
 		
-		String seq = "";
+		String seq = ""; //
 		
 		float a_total = 0;
 		float c_total = 0;
