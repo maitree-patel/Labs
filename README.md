@@ -7,3 +7,9 @@
    p(G) = 0.39
    p(T) = 0.11
    What is the expected frequency now of “AAA”?  Does Java produce “AAA” at close to the expected frequency?
+   
+   Additionally, Modify your code and test code to work on protein sequences so that random sequences are generated with the background frequency of proteins in SwissProt: https://web.expasy.org/protscale/pscale/A.A.Swiss-Prot.html
+   
+   How do you test your (or AI code) to make sure that protein sequences match the expected background levels?
+   
+
