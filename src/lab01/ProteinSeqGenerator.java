@@ -4,7 +4,7 @@
  * The ProSeqGenerator_TestAICode.java contains an optimized version of this code along with testing it using a chi-square test
  */
 
-package labs;
+package lab01;
 
 import java.util.Random;
 
