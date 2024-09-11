@@ -56,6 +56,7 @@ public class AminoAcidQuiz
  * Do extra credit
  * Add seconds?
  * Check all conditions
+ * Timer method?
  */
 
 
