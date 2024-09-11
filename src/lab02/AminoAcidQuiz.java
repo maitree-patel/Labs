@@ -27,6 +27,9 @@ public class AminoAcidQuiz
 				                "methionine", "phenylalanine", "proline", "serine", 
 				                "threonine", "tryptophan", "tyrosine", "valine"};
 		int x = 0; //remove after changing condition!
+		int total_ques = 0;
+		int correct = 0;
+		
 		while (x<(aa_fullname.length)) //change condition!
 		{
 			int index = random.nextInt(20);
@@ -41,7 +44,10 @@ public class AminoAcidQuiz
 			
 			if (aa_input.equals(aa_ans)) 
 			{
-				System.out.println("Right answer! Your is now "); //Add score and time to this print
+				System.out.println("Right answer! Your score is now"); //Add score and time to this print
+			} else 
+			{
+				System.out.println("Wrong answer, the right answer is " + aa_ans + "." + "Your score is now ");
 			}
 			x++;
 			
@@ -50,3 +56,4 @@ public class AminoAcidQuiz
 	}
 
 }
+
