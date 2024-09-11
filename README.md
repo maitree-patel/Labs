@@ -12,5 +12,27 @@
    Additionally, Modify your code and test code to work on protein sequences so that random sequences are generated with the background frequency of proteins in SwissProt: https://web.expasy.org/protscale/pscale/A.A.Swiss-Prot.html
    
    How do you test your (or AI code) to make sure that protein sequences match the expected background levels?
+
+## Lab 02
+Make a quiz to drill amino acids!
+- It is 30 seconds long
+- The quiz ends after 30 seconds or when there is a single incorrect answer
+- The program displays the full name of an amino acid (like “alanine” ) and asks the user to type in the one character code (like a)
+- The quiz ignores case in the answer.
+- The program displays the amino acids in random order, can repeat amino acids and can show more than 20 if the user gets that many correct.
+- The total score is the number of correct answers
+
+**Improvements/modifications**
+- Make the # of seconds a parameter that can be passed in on the command line.
+- Alternatively, allow an option that will ask a certain number of questions before terminating or allow the user to quit by typing “quit”
+- Have the program not terminate on wrong answers but give a report at the end
+summarizing which amino acids were gotten right and wrong how many times.
+
+When I used ChatGPT, it got partway there but didn’t perfectly meet the specifications.
+Compare your solution to a ChatGPT solution.  What data structures did ChatGPT use 
+to solve the problem?  Does its code meet all the requirements of the specifications?
+
+
+
    
 
