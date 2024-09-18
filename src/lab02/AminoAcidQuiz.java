@@ -1,6 +1,7 @@
 package lab02;
 
 import java.util.Random;
+//importing scanner class that takes integer as input
 import java.util.Scanner;
 
 public class AminoAcidQuiz 
@@ -31,8 +32,8 @@ public class AminoAcidQuiz
 
 		int total_ques = 0;
 		int correct = 0;
-		int aa_score[] = new int[20];
-		int aa_total[] = new int[20];
+		int aa_score[] = new int[20]; //score for each amino acid
+		int aa_total[] = new int[20]; //total number of times the amino acid is tested
 		
 		while (start < end*1000) 
 		{
@@ -76,12 +77,5 @@ public class AminoAcidQuiz
 	}	
 	
 }
-
-/*
- * Do extra credit
- * Add seconds?
- * Check all conditions
- * source: https://www.baeldung.com/java-stop-execution-after-certain-time
- */
 
 
