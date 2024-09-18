@@ -6,6 +6,7 @@ public class AminoAcidQuiz_ChatGPT
 {
 	
 	/*chatgpt used hashmap data structure to store the key-value pair for the full name and single code for amino acids
+	 * It also has a separate function to get a random amino acid that is called from the main program
 	 * It meets all the requirements:
 	 * - It takes a user input time in seconds
 	 * - It does not end when user gives a wrong answer
