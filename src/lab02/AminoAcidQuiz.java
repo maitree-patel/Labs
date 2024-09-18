@@ -7,6 +7,7 @@ public class AminoAcidQuiz
 {
 	public static void main(String[] args) 
 	{
+		//user input for time
 		Scanner time= new Scanner(System.in);
 		long start = System.currentTimeMillis();
 		
@@ -30,13 +31,15 @@ public class AminoAcidQuiz
 
 		int total_ques = 0;
 		int correct = 0;
+		int aa_score[] = new int[20];
+		int aa_total[] = new int[20];
 		
-		while (System.currentTimeMillis() < end*1000) 
+		while (start < end*1000) 
 		{
 			int index = random.nextInt(20);
 			
 			String aa_ques = aa_fullname[index];
-			String aa_ans = ""+aa_code[index];
+			String aa_ans = ""+aa_code[index]; 
 			
 			System.out.println("What is the single character code for " + aa_ques + " ?");
 			
@@ -49,14 +52,24 @@ public class AminoAcidQuiz
 			} else if (aa_input.equals(aa_ans)) 
 			{
 				correct += 1;
+				aa_score[index] += 1;
+				aa_total[index] += 1;
 				
 				System.out.println("Right answer! Your score is now " + correct + "/" + total_ques);
 			} else 
 			{
+				aa_total[index] += 1;
 				System.out.println("Wrong answer, the right answer is " + aa_ans + ". " + "Your score is now " + correct + "/" + total_ques);
 			}
 		}
 		System.out.println("Your score report:");
+		for (int i=0; i<20; i++)
+		{
+			if (aa_total[i] != 0) 
+			{
+				System.out.println("Total right for " + aa_fullname[i] + " = " + aa_score[i] + "/" + aa_total[i]);
+			}
+		}
 		System.out.println("Total wrong = " + (total_ques-correct));
 		System.out.println("Total correct = " + correct);
 		System.out.println("Percentage score = " + (correct/total_ques)*100 + "%");
