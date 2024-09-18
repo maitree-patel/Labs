@@ -29,6 +29,10 @@ public class AminoAcidQuiz
 				                "histidine", "isoleucine", "leucine", "lysine", 
 				                "methionine", "phenylalanine", "proline", "serine", 
 				                "threonine", "tryptophan", "tyrosine", "valine"};
+		
+		String affirmations[] = {"", ", great job!", 
+				                 ", amazing!", ", you're smashing it!", 
+				                 ", you've got it!"};
 
 		int total_ques = 0;
 		int correct = 0;
@@ -56,14 +60,16 @@ public class AminoAcidQuiz
 				aa_score[index] += 1;
 				aa_total[index] += 1;
 				
-				System.out.println("Right answer! Your score is now " + correct + "/" + total_ques);
+				int affirmation_index = random.nextInt(5);
+				System.out.println("Right answer" + affirmations[affirmation_index]);
 			} else 
 			{
 				aa_total[index] += 1;
-				System.out.println("Wrong answer, the right answer is " + aa_ans + ". " + "Your score is now " + correct + "/" + total_ques);
+				System.out.println("Wrong answer :( The right answer is " + aa_ans + ". " + "Your score is now " + correct + "/" + total_ques);
 			}
 		}
-		System.out.println("Your score report:");
+		System.out.println("Times Up!");
+		System.out.println("Your Scorecard:");
 		for (int i=0; i<20; i++)
 		{
 			if (aa_total[i] != 0) 
@@ -71,9 +77,33 @@ public class AminoAcidQuiz
 				System.out.println("Total right for " + aa_fullname[i] + " = " + aa_score[i] + "/" + aa_total[i]);
 			}
 		}
+		
 		System.out.println("Total wrong = " + (total_ques-correct));
 		System.out.println("Total correct = " + correct);
 		System.out.println("Percentage score = " + (correct/total_ques)*100 + "%");
+		if ((correct/total_ques)*100 < 50) 
+		{
+			System.out.println("You've got some work to do, let's get you to a 100!");
+		} else if ((correct/total_ques)*100 > 50) 
+		{
+			System.out.println("You could do Better!");
+		} else if ((correct/total_ques)*100 > 70) 
+		{
+			System.out.println("Just a little more practice until you ace this quiz!");
+			
+		} else if ((correct/total_ques)*100 > 80) 
+		{
+			System.out.println("So close, yet so far!");
+			
+		} else if ((correct/total_ques)*100 > 90) 
+		{
+			System.out.println("You almost got all right!");
+			
+		} else if ((correct/total_ques)*100 == 100) 
+		{
+			System.out.println("You did Excellent! or was that fluke?");
+			System.out.println("Keep up the hard work!");
+		} 
 	}	
 	
 }
