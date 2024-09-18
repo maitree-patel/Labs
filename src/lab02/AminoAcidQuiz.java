@@ -26,7 +26,7 @@ public class AminoAcidQuiz
 		int total_ques = 0;
 		int correct = 0;
 		
-		while (System.currentTimeMillis() < end) 
+		while (System.currentTimeMillis() <= end) 
 		{
 			int index = random.nextInt(20);
 			
@@ -38,7 +38,10 @@ public class AminoAcidQuiz
 			String aa_input = System.console().readLine().toUpperCase();
 			total_ques += 1;
 			
-			if (aa_input.equals(aa_ans)) 
+			if (aa_input.equals("QUIT")) 
+			{
+				break;
+			} else if (aa_input.equals(aa_ans)) 
 			{
 				correct += 1;
 				
@@ -48,8 +51,12 @@ public class AminoAcidQuiz
 				System.out.println("Wrong answer, the right answer is " + aa_ans + ". " + "Your score is now " + correct + "/" + total_ques);
 			}
 		}
-		
+		System.out.println("Your score report");
+		System.out.println("Total wrong = " + (total_ques-correct));
+		System.out.println("Total correct = " + correct);
+		System.out.println("Percentage score = " + (correct/total_ques)*100 + "%");
 	}	
+	
 }
 
 /*
