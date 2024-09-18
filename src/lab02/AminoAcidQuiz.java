@@ -1,13 +1,18 @@
 package lab02;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class AminoAcidQuiz 
 {
 	public static void main(String[] args) 
 	{
+		Scanner time= new Scanner(System.in);
 		long start = System.currentTimeMillis();
-		long end = start+(30*1000);
+		
+		System.out.println("How long would you like the quiz to be: Enter time in seconds:");
+		int total_duration = time.nextInt();
+		long end = System.currentTimeMillis() + (total_duration*1000);
 		
 		Random random = new Random();
 		
@@ -26,7 +31,7 @@ public class AminoAcidQuiz
 		int total_ques = 0;
 		int correct = 0;
 		
-		while (System.currentTimeMillis() <= end) 
+		while (System.currentTimeMillis() < end*1000) 
 		{
 			int index = random.nextInt(20);
 			
@@ -51,7 +56,7 @@ public class AminoAcidQuiz
 				System.out.println("Wrong answer, the right answer is " + aa_ans + ". " + "Your score is now " + correct + "/" + total_ques);
 			}
 		}
-		System.out.println("Your score report");
+		System.out.println("Your score report:");
 		System.out.println("Total wrong = " + (total_ques-correct));
 		System.out.println("Total correct = " + correct);
 		System.out.println("Percentage score = " + (correct/total_ques)*100 + "%");
