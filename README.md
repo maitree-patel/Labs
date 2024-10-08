@@ -32,6 +32,43 @@ When I used ChatGPT, it got partway there but didn’t perfectly meet the specif
 Compare your solution to a ChatGPT solution.  What data structures did ChatGPT use 
 to solve the problem?  Does its code meet all the requirements of the specifications?
 
+## Lab03
+
+## Lab04
+### Part 1
+Make a static factory method that parses a Fasta file and returns a list 
+of FastaSequence objects:
+
+*public static List<FastaSequence> readFastaFile(String filepath) throws Exception {…}*
+
+Your FastaSequence class should have at least 3 methods:
+
+// returns the header of this sequence without the “>”
+ 
+*public String getHeader() {…}*
+
+// returns the Dna sequence of this FastaSequence
+ 
+*public String getSequence() {…}*
+	
+// returns the number of G’s and C’s divided by the length of this sequence
+	
+*public float getGCRatio() {…}*
+
+### Part 2
+Implement the below method that inputs a List<FastaSequence> and outputs a columnar spreadsheet represented as a tab-separated .txt file
+
+*public static void writeTableSummary( List<FastaSequence> list, File outputFile) throws Exception {}*
+
+All fields in all rows should be tab separated (\t) with a newline (\n) at the end. The first line of your output file should be a header row with “sequenceID numA numC numG numT sequence” (all tab separated with a newline at the end).
+
+For each sequence in the fasta file there should be one row with the sequenceID, then the number of A,C,G,T and the sequence itself (all tab separated with a newline at the end).
+
+So the input file on the left would produce the text file on the right (that can be opened in Excel or a text editor of your choice).
+
+<img width="1103" alt="Screenshot 2024-10-08 at 4 39 51 PM" src="https://github.com/user-attachments/assets/09e79505-87ab-459f-a536-eeabc2eb0c25">
+
+
 
 
    
