@@ -151,7 +151,6 @@ public class FastaSequence
 			
 			writer.write(seqid + "\t" + numa + "\t" + numc + "\t" + numg + "\t" + numt + "\t" + sequence);
 		}
-		
 		writer.flush();
 		writer.close();
 	}
