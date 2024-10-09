@@ -108,6 +108,7 @@ public class FastaSequence
 		return count_t;
 	}
 	
+	//factory method
 	public static List<FastaSequence> readFastaFile(String filepath) throws Exception
 	{
 		//read in file path and parse to get list of fasta sequence objects
