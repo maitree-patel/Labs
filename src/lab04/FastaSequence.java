@@ -48,6 +48,66 @@ public class FastaSequence
 		return gc_ratio;
 	}
 	
+	public int getA()
+	{
+		int count_a = 0;
+		
+		for (int i=0; i<sequence.length(); i++) 
+		{
+			String nucleotide = ""+sequence.charAt(i); 
+			if (nucleotide == "A") 
+			{
+				count_a += 1;
+			}
+		}
+		return count_a;
+	}
+	
+	public int getG()
+	{
+		int count_g = 0;
+		
+		for (int i=0; i<sequence.length(); i++) 
+		{
+			String nucleotide = ""+sequence.charAt(i); 
+			if (nucleotide == "G") 
+			{
+				count_g += 1;
+			}
+		}
+		return count_g;
+	}
+	
+	public int getC()
+	{
+		int count_c = 0;
+		
+		for (int i=0; i<sequence.length(); i++) 
+		{
+			String nucleotide = ""+sequence.charAt(i); 
+			if (nucleotide == "C") 
+			{
+				count_c += 1;
+			}
+		}
+		return count_c;
+	}
+	
+	public int getT()
+	{
+		int count_t = 0;
+		
+		for (int i=0; i<sequence.length(); i++) 
+		{
+			String nucleotide = ""+sequence.charAt(i); 
+			if (nucleotide == "T") 
+			{
+				count_t += 1;
+			}
+		}
+		return count_t;
+	}
+	
 	public static List<FastaSequence> readFastaFile(String filepath) throws Exception
 	{
 		//read in file path and parse to get list of fasta sequence objects
@@ -70,4 +130,30 @@ public class FastaSequence
 		fastafile.close();
 		return fastaSequences;
 	}
+
+	// Part 2
+	public static void writeTableSummary( List<FastaSequence> list, File outputFile) throws Exception 
+	{
+		BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
+		
+		//header
+		writer.write("sequenceID\tnumA\tnumC\tnumG\tnumT\tsequence");
+		
+		for (FastaSequence seq : list) 
+		{
+			String seqid = seq.header;
+			int numa = seq.getA();
+			int numc = seq.getC();
+			int numg = seq.getG();
+			int numt = seq.getT();
+			String sequence = seq.sequence;
+			
+			writer.write(seqid + "\t" + numa + "\t" + numc + "\t" + numg + "\t" + numt + "\t" + sequence);
+		}
+		
+		writer.flush();
+		writer.close();
+		
+	}
 }
+
