@@ -153,7 +153,6 @@ public class FastaSequence
 		
 		writer.flush();
 		writer.close();
-		
 	}
 }
 
