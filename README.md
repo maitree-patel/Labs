@@ -33,6 +33,7 @@ Compare your solution to a ChatGPT solution.  What data structures did ChatGPT u
 to solve the problem?  Does its code meet all the requirements of the specifications?
 
 ## Lab03
+https://github.com/maitree-patel/Lab03 
 
 ## Lab04
 ### Part 1
