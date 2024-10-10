@@ -36,13 +36,13 @@ public class FastaSequence
 		for (int i=0; i<sequence.length(); i++) 
 		{
 			String nucleotide = ""+sequence.charAt(i); 
-			if (nucleotide == "G" || nucleotide == "C") 
+			if (nucleotide.equals("G") || nucleotide.equals("C")) 
 			{
 				count_gc += 1;
 			}
 		}
 		
-		float gc_ratio = (total_len/count_gc)*100;
+		float gc_ratio = (count_gc/total_len)*100;
 		return gc_ratio;
 	}
 	
@@ -76,13 +76,12 @@ public class FastaSequence
 		//parsing reader
 		
 		//reading each line
-		String line = fastafile.readLine();
+		String line;
 		StringBuilder sequenceBuilder = new StringBuilder();
 		String head = null;
 		
-		while ((line != null)) {
+		while ((line = fastafile.readLine()) != null) {
 	        if (line.startsWith(">")) {
-
 	        	if (head != null) {
 	                fastaSequences.add(new FastaSequence(head, sequenceBuilder.toString()));
 	            }
@@ -91,6 +90,11 @@ public class FastaSequence
 	        } else {
 	            sequenceBuilder.append(line); //append the sequence that spans multiple lines
 	        }
+	    }
+        
+		//adding the last line
+		if (head != null) {
+	        fastaSequences.add(new FastaSequence(head, sequenceBuilder.toString()));
 	    }
 		
 		fastafile.close();
@@ -103,18 +107,18 @@ public class FastaSequence
 		BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
 		
 		//header
-		writer.write("sequenceID\tnumA\tnumC\tnumG\tnumT\tsequence");
+		writer.write("sequenceID\tnumA\tnumC\tnumG\tnumT\tsequence\n");
 		
 		for (FastaSequence seq : list) 
 		{
 			String seqid = seq.header;
 			Object numa = seq.getChar().get('A');
-			Object numc = seq.getChar().get('T');
+			Object numc = seq.getChar().get('C');
 			Object numg = seq.getChar().get('G');
-			Object numt = seq.getChar().get('C');
+			Object numt = seq.getChar().get('T');
 			String sequence = seq.sequence;
 			
-			writer.write(seqid + "\t" + numa + "\t" + numc + "\t" + numg + "\t" + numt + "\t" + sequence);
+			writer.write(seqid + "\t" + numa + "\t" + numc + "\t" + numg + "\t" + numt + "\t" + sequence + "\n");
 		}
 		writer.flush();
 		writer.close();
@@ -122,7 +126,7 @@ public class FastaSequence
 	
 	public static void main(String[] args) throws Exception 
 	{
-			List<FastaSequence> fastaSequences = readFastaFile("test.fasta");
+			List<FastaSequence> fastaSequences = readFastaFile("src/test.fasta");
 			for (FastaSequence fastaSequence : fastaSequences) {
                 System.out.println("Header: " + fastaSequence.getHeader());
                 System.out.println("Sequence: " + fastaSequence.getSequence());
