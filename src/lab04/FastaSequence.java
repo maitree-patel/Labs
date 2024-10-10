@@ -3,7 +3,7 @@ package lab04;
 import java.util.*;
 import java.io.*;
 //import java.io.BufferedReader; 
-import java.io.FileReader; 
+//import java.io.FileReader; 
 
 //creating FastaSequence class with three methods
 public class FastaSequence
@@ -71,27 +71,28 @@ public class FastaSequence
 	{
 		//read in file path and parse to get list of fasta sequence objects
 		List<FastaSequence> fastaSequences = new ArrayList<>();
-		BufferedReader fastafile = new BufferedReader(new FileReader("test.fasta"));
+		BufferedReader fastafile = new BufferedReader(new FileReader(filepath));
 		
 		//parsing reader
 		
 		//reading each line
 		String line = fastafile.readLine();
+		StringBuilder sequenceBuilder = new StringBuilder();
+		String head = null;
 		
-		if (line.startsWith(">")) 
-		{
-			String header = line.substring(1);
-			String sequence = "";
-			
-			while (!line.startsWith(">")) 
-			{
-				line += 1;
-				sequence += line;
-			}
-			
-			//adding a new FastaSequence object
-			fastaSequences.add(new FastaSequence(header, sequence));
-		}
+		while ((line != null)) {
+	        if (line.startsWith(">")) {
+
+	        	if (head != null) {
+	                fastaSequences.add(new FastaSequence(head, sequenceBuilder.toString()));
+	            }
+	            head = line.substring(1); // Remove the '>' character
+	            sequenceBuilder = new StringBuilder(); // Start a new sequence
+	        } else {
+	            sequenceBuilder.append(line); //append the sequence that spans multiple lines
+	        }
+	    }
+		
 		fastafile.close();
 		return fastaSequences;
 	}
