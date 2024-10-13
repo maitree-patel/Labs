@@ -6,7 +6,7 @@ import java.io.*;
 //import java.io.FileReader; 
 
 //creating FastaSequence class with three methods
-public class FastaSequence
+public class FastaSequence implements Comparable<FastaSequence>
 {
 	private String header;
 	private String sequence;
@@ -124,9 +124,21 @@ public class FastaSequence
 		writer.close();
 	}
 	
+	public int compareTo(FastaSequence other) {
+        return Integer.compare(this.sequence.length(), other.sequence.length());
+    }
+	
 	public static void main(String[] args) throws Exception 
 	{
 			List<FastaSequence> fastaSequences = readFastaFile("src/test.fasta");
+			
+			Collections.sort(fastaSequences);
+			
+			for (FastaSequence seqs : fastaSequences) {
+				
+				System.out.println(seqs.getSequence());
+			}
+			
 			for (FastaSequence fastaSequence : fastaSequences) {
                 System.out.println("Header: " + fastaSequence.getHeader());
                 System.out.println("Sequence: " + fastaSequence.getSequence());
