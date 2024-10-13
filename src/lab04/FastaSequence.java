@@ -18,6 +18,7 @@ public class FastaSequence implements Comparable<FastaSequence>
 		this.sequence = sequence;
 	}
 	
+	//4 class methods
 	public String getHeader()
 	{
 		return header;
@@ -65,16 +66,12 @@ public class FastaSequence implements Comparable<FastaSequence>
 		return nucleotides;
 	}
 	
-	
-	//factory method
+	//static factory method
 	public static List<FastaSequence> readFastaFile(String filepath) throws Exception
 	{
-		//read in file path and parse to get list of fasta sequence objects
 		List<FastaSequence> fastaSequences = new ArrayList<>();
 		BufferedReader fastafile = new BufferedReader(new FileReader(filepath));
-		
-		//parsing reader
-		
+				
 		//reading each line
 		String line;
 		StringBuilder sequenceBuilder = new StringBuilder();
@@ -125,19 +122,34 @@ public class FastaSequence implements Comparable<FastaSequence>
 	}
 	
 	public int compareTo(FastaSequence other) {
-        return Integer.compare(this.sequence.length(), other.sequence.length());
+        return Float.compare(this.gcRatio(), other.gcRatio());
     }
+	
+	//defining multiple comparing criteria using Comparators as static methods
+	public static Comparator<FastaSequence> seqAlphabetical = new Comparator<FastaSequence>() 
+	{
+		//compare method as a part of comparator static method
+		@Override
+		public int compare(FastaSequence seq1, FastaSequence seq2) 
+		{
+			return seq1.sequence.compareTo(seq2.sequence);
+		}
+	};
+	
+	public static Comparator<FastaSequence> headerAlphabetical = new Comparator<FastaSequence>()
+	{
+		
+		public int compare(FastaSequence seq1, FastaSequence seq2) 
+		{
+			return seq1.header.compareTo(seq2.header);
+		}
+	};
 	
 	public static void main(String[] args) throws Exception 
 	{
 			List<FastaSequence> fastaSequences = readFastaFile("src/test.fasta");
 			
-			Collections.sort(fastaSequences);
-			
-			for (FastaSequence seqs : fastaSequences) {
-				
-				System.out.println(seqs.getSequence());
-			}
+			//Collections.sort(fastaSequences);
 			
 			for (FastaSequence fastaSequence : fastaSequences) {
                 System.out.println("Header: " + fastaSequence.getHeader());
@@ -146,6 +158,12 @@ public class FastaSequence implements Comparable<FastaSequence>
             }
 			
 			writeTableSummary(fastaSequences, new File("output.txt"));
+			
+			fastaSequences.sort(FastaSequence.headerAlphabetical);
+			
+			for (FastaSequence seqs : fastaSequences) {
+				System.out.println(seqs.getHeader());
+			}
 	}
 }
 
