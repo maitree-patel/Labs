@@ -10,10 +10,20 @@ public class AminoAcidQuiz
 	{
 		//user input for time
 		Scanner time= new Scanner(System.in);
+        
+		
 		long start = System.currentTimeMillis();
 		
 		System.out.println("How long would you like the quiz to be: Enter time in seconds:");
-		int total_duration = time.nextInt();
+		
+		//handling string inputs to set time to 30 seconds
+		int total_duration = 30;
+        if (time.hasNextInt()) {
+        	total_duration = time.nextInt();
+        } else {
+            System.out.println("Invalid input. Setting time to default value of 30 seconds.");
+        }
+		
 		long end = System.currentTimeMillis() + (total_duration*1000);
 		
 		Random random = new Random();
@@ -30,7 +40,8 @@ public class AminoAcidQuiz
 				                "methionine", "phenylalanine", "proline", "serine", 
 				                "threonine", "tryptophan", "tyrosine", "valine"};
 		
-		String affirmations[] = {"", ", great job!", 
+		String affirmations[] = {"",
+								 ", great job!", 
 				                 ", amazing!", 
 				                 ", you're smashing it!", 
 				                 ", you've got it!"};
@@ -40,7 +51,7 @@ public class AminoAcidQuiz
 		int aa_score[] = new int[20]; //score for each amino acid
 		int aa_total[] = new int[20]; //total number of times the amino acid is tested
 		
-		while (start < end*1000) 
+		while (start < end) 
 		{
 			int index = random.nextInt(20);
 			
