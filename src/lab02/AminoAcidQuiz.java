@@ -31,7 +31,8 @@ public class AminoAcidQuiz
 				                "threonine", "tryptophan", "tyrosine", "valine"};
 		
 		String affirmations[] = {"", ", great job!", 
-				                 ", amazing!", ", you're smashing it!", 
+				                 ", amazing!", 
+				                 ", you're smashing it!", 
 				                 ", you've got it!"};
 
 		int total_ques = 0;
