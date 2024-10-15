@@ -1,5 +1,6 @@
 package lab02;
 
+import java.math.BigDecimal;
 import java.util.Random;
 //importing scanner class that takes integer as input
 import java.util.Scanner;
