@@ -13,7 +13,6 @@ public class AminoAcidQuiz extends JFrame
 	
 	public AminoAcidQuiz() 
 	{
-		//title
 		super("Amino Acid Quiz");
 		
 		//setting size of window
@@ -22,7 +21,7 @@ public class AminoAcidQuiz extends JFrame
 		//location of window in the center
 		setLocationRelativeTo(null);
 		
-		//button
+		//adding button and text
 		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(doubleButton, BorderLayout.SOUTH);
 		getContentPane().add(aTextField, BorderLayout.CENTER);
