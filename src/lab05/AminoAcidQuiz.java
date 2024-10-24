@@ -13,6 +13,7 @@ public class AminoAcidQuiz extends JFrame
 	
 	public AminoAcidQuiz() 
 	{
+		//title
 		super("Amino Acid Quiz");
 		
 		//setting size of window
