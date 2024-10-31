@@ -70,6 +70,15 @@ So the input file on the left would produce the text file on the right (that can
 
 <img width="1103" alt="Screenshot 2024-10-08 at 4 39 51 PM" src="https://github.com/user-attachments/assets/09e79505-87ab-459f-a536-eeabc2eb0c25">
 
+## Lab 05
+In Java, make a GUI version of your amino acid quiz (Lab #2).
+Your GUI should have:
+- a place for users to type in the answer
+- a place that shows how many right/wrong and the time left
+- “start quiz” and “cancel” buttons
+- The time left should count down (in real-time) from 30 sec
+The quiz should end when the time left is 0 seconds. The quiz should not terminate on a wrong answer (unlike assignment #2) but keep track of # right and wrong.
+
 
 
 
