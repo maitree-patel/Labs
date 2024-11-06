@@ -110,7 +110,7 @@ public class AminoAcidQuizGUI {
     }
 
     private void startTimer() {
-       Timer timer = new Timer(1000, new ActionListener()
+       timer = new Timer(1000, new ActionListener()
        {
     	    @Override
             public void actionPerformed(ActionEvent e) 
@@ -119,7 +119,7 @@ public class AminoAcidQuizGUI {
                     timeLeft--;
                     timerLabel.setText("Time left: " + timeLeft + " seconds");
                 } else {
-                    ((Timer) e.getSource()).stop();
+                    timer.stop();
                     timerLabel.setText("Time's up!");
             }
         }
@@ -153,9 +153,7 @@ public class AminoAcidQuizGUI {
     private class CancelButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (timer != null && timer.isRunning()) {
-                ((Timer) e.getSource()).stop();
-            }
+            timer.stop();
             questionField.setText("");
             timerLabel.setText("Quiz Over!");
             scoreLabel.setText("Your Total Score is: " + score + "/" + totalQues);
