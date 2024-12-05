@@ -2,38 +2,34 @@ package lab06;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.concurrent.*;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class FindPrimesGUI {
 
-    // Declare GUI components
+    //GUI components
     private JFrame frame;
     private JTextArea textArea;
     private JTextField inputField;
     private JTextField threadField;
     private JButton startButton;
     private JButton cancelButton;
-
-    // Volatile boolean to track cancellation
     private volatile boolean cancel = false;
 
     public FindPrimesGUI() {
-        // Initialize the GUI components
-        frame = new JFrame("Multi-threaded Prime Number Counter");
+        //initializing components
+        frame = new JFrame("Count Primes GUI");
         textArea = new JTextArea(15, 40);
-        inputField = new JTextField(10); // Input field for user to enter a large number
-        threadField = new JTextField(5); // Input field for user to specify thread count
+        inputField = new JTextField(10); //large number input 
+        threadField = new JTextField(5); //no.of threads input
         startButton = new JButton("Start Counting");
         cancelButton = new JButton("Cancel");
 
-        // Set up text area properties
-        textArea.setEditable(false); // Make the text area read-only
-        JScrollPane scrollPane = new JScrollPane(textArea); // Add scrolling
+        textArea.setEditable(false);
+        JScrollPane scrollPane = new JScrollPane(textArea);
 
-        // Set up input panel
         JPanel inputPanel = new JPanel();
         inputPanel.add(new JLabel("Enter a number:"));
         inputPanel.add(inputField);
@@ -41,17 +37,14 @@ public class FindPrimesGUI {
         inputPanel.add(threadField);
         inputPanel.add(startButton);
         inputPanel.add(cancelButton);
-        cancelButton.setEnabled(false); // Cancel button disabled initially
+        cancelButton.setEnabled(false);
 
-        // Set up the frame layout
         frame.setLayout(new BorderLayout());
         frame.add(inputPanel, BorderLayout.NORTH);
         frame.add(scrollPane, BorderLayout.CENTER);
 
-        // Set up button listeners
         setupButtonListeners();
 
-        // Final frame properties
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setLocationRelativeTo(null); // Center the frame on the screen
@@ -59,9 +52,7 @@ public class FindPrimesGUI {
     }
 
     private void setupButtonListeners() {
-        // Start button listener
         startButton.addActionListener(e -> {
-            // Get user input and validate it
             String inputText = inputField.getText();
             String threadText = threadField.getText();
 
@@ -79,62 +70,73 @@ public class FindPrimesGUI {
                     return;
                 }
 
-                // Reset cancel flag and UI states
                 cancel = false;
                 startButton.setEnabled(false);
                 cancelButton.setEnabled(true);
                 textArea.append("Starting prime number calculation up to " + maxNumber + " with " + numThreads + " threads...\n");
 
-                // Start the prime counting threads
-                Thread primeThread = new Thread(() -> countPrimes(maxNumber, numThreads));
+                Thread primeThread = new Thread(() -> countPrimesWithProgress(maxNumber, numThreads));
                 primeThread.start();
             } catch (NumberFormatException ex) {
                 textArea.append("Invalid input. Please enter valid numbers.\n");
             }
         });
 
-        // Cancel button listener
         cancelButton.addActionListener(e -> {
-            cancel = true; // Signal the threads to stop
-            textArea.append("Calculation canceled by user.\n");
+            cancel = true; 
+            textArea.append("Calculation canceled!\n");
         });
     }
 
-    private void countPrimes(int maxNumber, int numThreads) {
-        long startTime = System.currentTimeMillis(); // Start timing
-
-        // Divide the work among the threads
+    private void countPrimesWithProgress(int maxNumber, int numThreads) {
+        long startTime = System.currentTimeMillis();
+        AtomicInteger totalPrimes = new AtomicInteger(0); // Shared counter for total primes
         ExecutorService executor = Executors.newFixedThreadPool(numThreads);
-        List<Future<Integer>> futures = new ArrayList<>();
 
+        List<Future<Integer>> futures = new ArrayList<>();
         int range = maxNumber / numThreads;
         for (int i = 0; i < numThreads; i++) {
             int start = i * range + 1;
             int end = (i == numThreads - 1) ? maxNumber : (i + 1) * range;
-            futures.add(executor.submit(new PrimeCounterTask(start, end)));
+            futures.add(executor.submit(new PrimeCounterTask(start, end, totalPrimes)));
         }
 
-        int totalPrimes = 0;
+        Thread progressReporter = new Thread(() -> {
+            while (!executor.isTerminated() && !cancel) {
+                try {
+                    Thread.sleep(3000);
+                    textArea.append("Primes found so far = " + totalPrimes.get() + "\n");
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    break;
+                }
+            }
+        });
+        progressReporter.start();
 
         try {
             for (Future<Integer> future : futures) {
-                if (cancel) break; // If cancel is requested, stop the process
-                totalPrimes += future.get(); // Collect results from each thread
+                if (cancel) break;
+                future.get(); 
             }
         } catch (Exception e) {
             textArea.append("Error during calculation: " + e.getMessage() + "\n");
         } finally {
-            executor.shutdownNow(); // Ensure the executor is shut down
+            executor.shutdownNow(); 
+            try {
+                progressReporter.join(); 
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
         }
 
         if (!cancel) {
             long endTime = System.currentTimeMillis();
             long timeTaken = endTime - startTime;
-            textArea.append("Calculation complete! Total primes: " + totalPrimes + "\n");
-            textArea.append("Time taken: " + timeTaken + " ms\n");
+            textArea.append("Calculation complete! Total primes: " + totalPrimes.get() + "\n");
+            textArea.append("Time taken: " + timeTaken/1000 + " seconds\n");
         }
 
-        // Re-enable buttons on completion or cancellation
         SwingUtilities.invokeLater(() -> {
             startButton.setEnabled(true);
             cancelButton.setEnabled(false);
@@ -144,10 +146,12 @@ public class FindPrimesGUI {
     private class PrimeCounterTask implements Callable<Integer> {
         private final int start;
         private final int end;
+        private final AtomicInteger totalPrimes;
 
-        public PrimeCounterTask(int start, int end) {
+        public PrimeCounterTask(int start, int end, AtomicInteger totalPrimes) {
             this.start = start;
             this.end = end;
+            this.totalPrimes = totalPrimes;
         }
 
         @Override
@@ -156,6 +160,7 @@ public class FindPrimesGUI {
             for (int i = start; i <= end && !cancel; i++) {
                 if (isPrime(i)) {
                     primeCount++;
+                    totalPrimes.incrementAndGet();
                 }
             }
             return primeCount;
@@ -171,7 +176,14 @@ public class FindPrimesGUI {
     }
 
     public static void main(String[] args) {
-        // Launch the application
         SwingUtilities.invokeLater(FindPrimesGUI::new);
     }
 }
+
+//
+/*It took 18 seconds to find primes until 50000000, 
+ *12 seconds using 2 background threads,
+ *9 seconds using 4 threads,
+ *6 seconds using 6 threads,
+ *and 6 using 8 and 10 threads from where no more speed up was observed
+ */
